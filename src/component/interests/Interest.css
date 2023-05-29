@@ -1,0 +1,52 @@
+.right {
+    text-align: right;
+    align-items: right;
+}
+
+.delbt {
+    padding-right: 18px;
+    cursor: pointer;
+}
+
+
+.addinterest {
+    height: 40vh;
+    width: 97%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-bottom: 3rem;
+}
+.addinterest h1{
+text-align: left;
+width: 90%;
+}
+.divinput{
+    width: 90%;
+    padding: 0px 0px;
+    margin: 0px 0px;
+
+}
+.input{
+    width: 90%;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    padding: .8rem;
+    margin: 0px auto;
+}
+.addbtn{
+    font-size: 1rem;
+    padding: 7px 50px;
+    border-radius: 40px;
+    margin-top: 10px;
+    align-items: left;
+    color: white;
+    cursor: pointer;
+    background:linear-gradient(rgb(4, 3, 3),rgb(36, 36, 36))
+}
+.addbtn:hover{
+    background:linear-gradient(rgb(131, 129, 129),rgb(29, 24, 24))
+}
