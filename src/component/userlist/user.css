@@ -19,7 +19,9 @@ body {
 
 .main_user {
     width: 96%;
-    margin-top: 1rem;
+    margin-top: 3rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
     padding: .5rem;
     background-color: white;
 }
@@ -45,6 +47,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     border-radius: 30px;
+    /* margin-right: 0.5rem; */
 }
 
 thead {
@@ -72,4 +75,9 @@ tbody tr:hover {
     .divmain {
         width: 90%;
     }
+}
+
+.link_style{
+    text-decoration: none;
+    color: #000000;
 }

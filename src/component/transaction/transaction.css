@@ -1,0 +1,41 @@
+.head{
+    justify-content: space-between;
+    vertical-align: middle;
+    margin-left: 1rem;
+
+}
+
+.table_size{
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+.plus_svg{
+    margin-top: 14px;
+    width: 30px;
+    height: 30px;
+}
+
+.main_div{
+    margin-right: 3rem;
+    margin-top: 3rem;
+    width: 70%;
+    margin-left: 3rem;
+}
+
+.display{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.text-direction{
+    text-align: start;
+}
+
+.background{
+    background: #ffffff;
+    /* margin-left: 2rem; */
+    /* margin-right: 2rem; */
+    /* margin-bottom: 4rem; */
+}

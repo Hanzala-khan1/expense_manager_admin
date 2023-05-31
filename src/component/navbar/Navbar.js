@@ -17,8 +17,9 @@ const Navbar = () => {
                 <h1 className='headnav'>Admin Dashboard</h1>
                 <ul className={`menu ${menuOpen ? 'menu--open' : ''}`}>
                     <li><Link className='linkk' to="/user">Users</Link></li>
-                    <li><Link className='linkk' to="/interest">Interest</Link></li>
-                    <li><Link className='linkk' to="/timing">Timing</Link></li>
+                    <li><Link className='linkk' to="/budget">Budget</Link></li>
+                    <li><Link className='linkk' to="/interest">Cetegories</Link></li>
+                    <li><Link className='linkk' to="/currency">Currency Type</Link></li>
                     {/* <li><Link className='linkk' to="/report">Reports</Link></li>
                     <li><Link className='linkk' to="/review">Reviews</Link></li> */}
                 </ul>

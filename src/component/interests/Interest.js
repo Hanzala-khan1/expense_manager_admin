@@ -59,7 +59,7 @@ const Interest = () => {
             <div className='divmain'>
                 <div className='main_user'>
                     <div className='addinterest'>
-                        <h1> Add Interest</h1>
+                        <h1> Add Cetegory</h1>
                         <div className='divinput'>
                             <input
                                 className='input'

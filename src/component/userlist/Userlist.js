@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./user.css";
+import { Link } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import axios from 'axios';
@@ -21,7 +22,7 @@ const Userlist = () => {
     }, []);
     function generatePDF(data) {
         const doc = new jsPDF();
-        const tableColumn = ['ID', 'Email', 'Name', 'Interest','Gender', 'DOB', 'Country', 'City'];
+        const tableColumn = ['ID', 'Email', 'Name', 'Interest', 'Gender', 'DOB', 'Country', 'City'];
         const tableRows = [];
 
         // Add data to tableRows array
@@ -50,7 +51,7 @@ const Userlist = () => {
             <Navbar />
             <div className='divmain'>
                 <div className='main_user'>
-                    <h1 className='headuser'> Users <FontAwesomeIcon icon={faDownload} onClick={handleClick} className='downloadicon'/> </h1>
+                    <h1 className='headuser'> Users <FontAwesomeIcon icon={faDownload} onClick={handleClick} className='downloadicon' /> </h1>
                     <table>
                         <thead>
                             <tr>
@@ -62,9 +63,9 @@ const Userlist = () => {
                         <tbody>
                             {user.map(user => {
                                 return <tr>
-                                    <td>{user.name}</td>
-                                    <td>{user.email}</td>
-                                    <td>{user.city}-{user.country}</td>
+                                    <td><Link to="/transaction" className='link_style'> {user.name} </Link>  </td>
+                                    <td><Link to="/transaction" className='link_style'> {user.email} </Link></td>
+                                    <td><Link to="/transaction" className='link_style'>{user.city}-{user.country} </Link></td>
                                 </tr>
                             })}
                         </tbody>
