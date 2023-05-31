@@ -4,7 +4,6 @@ body{
 }
 
 .logo{
-    /* position: absolute; */
     margin-top: 3.6%;
     text-align: center;
     font-family: 'Inter', sans-serif;
@@ -14,7 +13,7 @@ body{
 /* identical to box height */
 }
 .inputlog{
-    width: 40%;
+    width: 33%;
     height: 50px;
     margin: 10px;
 }
@@ -49,18 +48,15 @@ body{
     font-weight: 600;
     font-size: 36px;
     line-height: 54px;
-    /* identical to box height */
     color: #171C1F;
 }
 .p{
     text-align: center;
-    /* margin-top: 1%; */
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
     line-height: 30px;
-    /* identical to box height */
     color: #8D8D8D;
 }
 .box1{
@@ -113,13 +109,13 @@ input:focus-visible{
     background: #FFFFFF;
     box-shadow: 0px 6px 19px rgba(159, 159, 159, 0.2);
     border-radius: 10px 10px 10px 10px;
-    width: 100%;
-    padding-left: calc(1em + 20px + 8px); /* icon width + icon padding-left + desired separation*/
+    width: 27%;
+    padding-left: calc(1em + 20px + 8px); 
     height: 4em;
   }
   
  label>button {
-    width: 33%;
+    width: 30%;
     height: 4em;
     background: #004064;
     border-radius: 10px;
@@ -144,7 +140,6 @@ input:focus-visible{
     }
  }
  
-
   .spritesheet {
     display: none;
   }
@@ -160,12 +155,10 @@ input:focus-visible{
 
   .login-button{
     text-align: center;
-    display: block;
     margin-top: 10px;
   }
 .forget_pass{
     margin-left: 52.1%;
-    /* right: 36.57%; */
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
@@ -177,7 +170,6 @@ input:focus-visible{
 .login{
     width: 440px;
     height: 58px;
-    /* margin-left: 462px; */
     background: #004064;
     border-radius: 10px;
     color: white;
@@ -202,4 +194,24 @@ input:focus-visible{
 }
 a{
     margin-bottom: 2%;
+}
+
+.otp_button{
+    margin-top: 11px;
+    margin-bottom: 11px;
+    width: 22%;
+    height: 4em;
+    background: #004064;
+    border-radius: 10px;
+    color: white;
+}
+
+.enter_otp{
+    text-align: center;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+    color: #806b6b;
 }
