@@ -8,7 +8,7 @@ import half from '../../assets/half.svg';
 import { colors } from '@mui/material';
 
 function Admin_Page() {
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState(0);
   const [otpSent, setOtpSent] = useState(false);
   const [enteredOTP, setEnteredOTP] = useState('');
 
@@ -48,39 +48,6 @@ function Admin_Page() {
     }, 2000);
   };
 
-  const [credentials, setCredentials] = useState({
-    email: undefined,
-    password: undefined,
-  });
-  const [login, setLogin] = useState(false);
-  const [error, setError] = useState({});
-
-  const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-  };
-
-  const { password, email } = credentials;
-
-  const handleClick = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios({
-        method: 'post',
-        url: 'http://81.0.219.62:3000/api/v1/admin/get-admin',
-        data: {
-          email: `${email}`,
-          password: `${password}`,
-        },
-      });
-      setError(res.data.data.data);
-      navigate('/user', { state: error });
-    } catch (err) {
-      setLogin(true);
-      setError(err.response.data.message);
-    }
-  };
 
   return (
     <div className='header'>
@@ -96,7 +63,7 @@ function Admin_Page() {
           <form onSubmit={handleSubmitPhoneNumber}>
             <label className="name-label text-center">
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 id="phoneNumber"
                 placeholder="Enter your phone number"
@@ -106,7 +73,7 @@ function Admin_Page() {
             </label>
             <br></br>
             <button type="submit" className="otp_button">
-              {otpSent ? 'Resend OTP' : 'Send OTP'}
+              Send OTP
             </button>
           </form>
         )}
@@ -132,7 +99,6 @@ function Admin_Page() {
           </form>
         )}
       </div>
-      {login && <h3 className='failed'>{error}</h3>}
     </div>
   );
 }
