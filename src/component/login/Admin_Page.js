@@ -22,23 +22,22 @@ function Admin_Page() {
 
   const handleSubmitPhoneNumber = (event) => {
     event.preventDefault();
-
-    // Code to send OTP to the provided phone number (via API call, for example)
-    // Replace the following code with your implementation
-
-    // Simulating API call delay for demonstration purposes
     setTimeout(() => {
       setOtpSent(true);
     }, 2000);
   };
 
+  const editNumber=()=>{
+    setOtpSent(!otpSent);
+    
+  }
+
+  const verify=()=>{
+    navigate("/user")
+  }
+
   const handleSubmitOTP = (event) => {
     event.preventDefault();
-
-    // Code to verify the entered OTP (via API call, for example)
-    // Replace the following code with your implementation
-
-    // Simulating API call delay for demonstration purposes
     setTimeout(() => {
       if (enteredOTP === '123456') {
         alert('OTP verified successfully!');
@@ -52,7 +51,7 @@ function Admin_Page() {
   return (
     <div className='header'>
       <div>
-        <h3 className='h3'>Welcome TO ChatApp</h3>
+        <h3 className='h3'>Welcome To Expense Manager App</h3>
       </div>
       <div>
         <p className='p'>Login to continue using </p>
@@ -80,7 +79,8 @@ function Admin_Page() {
 
         {otpSent && (
           <form onSubmit={handleSubmitOTP}>
-            <h3 className="text-center enter_otp">Enter the OTP:</h3>
+            <h3 className="text-center enter_otp">OTP sent to this : <span className='span_num'> {phoneNumber} </span> 
+            <span onClick={editNumber} style={{color:"blue" , cursor:'pointer'}}>  Edit</span></h3>
             <label>
               <input
                 type="text"
@@ -93,7 +93,7 @@ function Admin_Page() {
               />
             </label>
             <br></br>
-            <button type="submit" className="otp_button">
+            <button onClick={verify} type="submit" className="otp_button">
               Verify OTP
             </button>
           </form>
