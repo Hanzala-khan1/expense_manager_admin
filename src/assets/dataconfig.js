@@ -1,0 +1,1 @@
+export const App_host = "http://81.0.219.62:7000"

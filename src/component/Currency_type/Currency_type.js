@@ -1,16 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../navbar/Navbar'
+import axios from 'axios';
+import { App_host } from '../../assets/dataconfig';
 function Budget() {
 
-    const currency_type = [
-        {
-            "username":"Zeeshan",
-            "symbol":"$",
-            "name_plural": "Ds",
-            "created_at": "2023-05-25 12:57:35",
+    const [profile, setProfile] = useState([]);
+    useEffect(() => {
+        getprofillist()
+    }, []);
+
+    const getprofillist = async () => {
+        try {
+            const res = await axios({
+                url: `${App_host}/profile/getProfile/`,
+                method: "get",
+                data: {},
+                headers: {
+                    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImlhdCI6MTY4NTAxOTMxOX0._hk0XM_tqmi3Mu1wKyyeHwEKJaSMz69RaMdEnvqg9Ww'
+                }
+            })
+            setProfile(res.data.data)
+        } catch (err) {
+            console.log(err)
 
         }
-    ];
+    }
     return (
         <div className="home">
             <Navbar />
@@ -21,17 +35,21 @@ function Budget() {
                         <thead>
                             <tr>
                                 <th>User Name</th>
+                                <th>Currency name</th>
                                 <th>Symbol</th>
                                 <th>Name Plural</th>
+                                <th>Currency code</th>
                                 <th>Created At</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {currency_type.map((item) => (
+                            {profile.map((item) => (
                                 <tr key={item.id}>
-                                    <td>{item.username}</td>
-                                    <td>{item.symbol}</td>
-                                    <td>{item.name_plural}</td>
+                                    <td>{item.user_name}</td>
+                                    <td>{item.currency_types.name}</td>
+                                    <td>{item.currency_types.symbol}</td>
+                                    <td>{item.currency_types.name_plural}</td>
+                                    <td>{item.currency_types.code}</td>
                                     <td>{item.created_at}</td>
                                 </tr>
                             ))}

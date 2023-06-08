@@ -7,35 +7,43 @@ import axios from 'axios';
 import Navbar from '../navbar/Navbar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowsDownToLine, faDownload, faFileDownload } from '@fortawesome/free-solid-svg-icons';
+import { App_host } from '../../assets/dataconfig';
 
 const Userlist = () => {
     const [user, setUser] = useState([]);
     useEffect(() => {
-        axios
-            .get('http://81.0.219.62:3000/api/v1/users/get-allUser')
-            .then(res => {
-                setUser(res.data);
-            })
-            .catch(err => {
-                console.log(err);
-            });
+        getuserlist()
     }, []);
+
+    const getuserlist = async () => {
+        try {
+            const res = await axios({
+                url: `${App_host}/user/getAllUser`,
+                method: "get",
+                data: {},
+                headers: {
+                    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImlhdCI6MTY4NTAxOTMxOX0._hk0XM_tqmi3Mu1wKyyeHwEKJaSMz69RaMdEnvqg9Ww'
+                }
+            })
+            setUser(res.data.data)
+        } catch (err) {
+            console.log(err)
+
+        }
+    }
     function generatePDF(data) {
         const doc = new jsPDF();
-        const tableColumn = ['ID', 'Email', 'Name', 'Interest', 'Gender', 'DOB', 'Country', 'City'];
+        const tableColumn = ['ID', 'Name', 'Phone', 'Amount', 'created_at'];
         const tableRows = [];
 
         // Add data to tableRows array
-        data.forEach(user => {
+        user.forEach(user => {
             const userData = [
-                user._id,
-                user.email,
+                user.id,
                 user.name,
-                user.interests,
-                user.gender,
-                user.dob,
-                user.country,
-                user.city
+                user.phone,
+                user.amount,
+                user.created_at,
             ];
             tableRows.push(userData);
         });
@@ -56,18 +64,30 @@ const Userlist = () => {
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Email</th>
                                 <th>Phone</th>
+                                <th>Amount</th>
+                                <th>created At</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {user.map(user => {
-                                return <tr>
-                                    <td><Link to="/transaction" className='link_style'> {user.name} </Link>  </td>
-                                    <td><Link to="/transaction" className='link_style'> {user.email} </Link></td>
-                                    <td><Link to="/transaction" className='link_style'>{user.city}-{user.country} </Link></td>
+                            {user.map(user => (
+                                <tr key={user._id}>
+                                    <td>
+                                        <Link to={`/transaction?id=${user.id}`} className='link_style'>
+                                            {user.name}
+                                        </Link>
+                                    </td>
+                                    <td><Link to={`/transaction?id=${user.id}`} className='link_style'>
+                                        {user.phone}
+                                    </Link></td>
+                                    <td><Link to={`/transaction?id=${user.id}`} className='link_style'>
+                                        {user.amount}
+                                    </Link></td>
+                                    <td><Link to={`/transaction?id=${user.id}`} className='link_style'>
+                                        {user.created_at}
+                                    </Link></td>
                                 </tr>
-                            })}
+                            ))}
                         </tbody>
                     </table>
                 </div>

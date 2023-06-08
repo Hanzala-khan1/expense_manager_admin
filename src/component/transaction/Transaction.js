@@ -1,154 +1,76 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Chart, LineController, BarController, LinearScale, CategoryScale, BarElement } from 'chart.js';
 import Navbar from '../navbar/Navbar';
+import axios from 'axios';
+import { Bar } from 'react-chartjs-2';
 import './transaction.css';
+import { useLocation } from 'react-router-dom';
+import { App_host } from '../../assets/dataconfig';
+
+
+// Use the name, email, and phone to filter and display transactions for the specific user
+
 
 Chart.register(LineController, BarController, LinearScale, CategoryScale, BarElement);
 
-const transaction = [
-    {
-        username: 'Zeeshan',
-        to_account_name: 'Hunny',
-        from_account_name: 'Shani',
-        amount: '10000',
-        created_at: '2023-05-26 15:28:56',
-    },
-    {
-        username: 'Saad',
-        to_account_name: 'Hunny',
-        from_account_name: 'Lashari',
-        amount: '20000',
-        created_at: '2023-05-26 15:28:56',
-    },
-
-    {
-        username: 'Yasir',
-        to_account_name: 'usama',
-        from_account_name: 'Shani',
-        amount: '150000',
-        created_at: '2023-05-26 15:28:56',
-    },
-
-    {
-        username: 'Adil',
-        to_account_name: 'Hunny',
-        from_account_name: 'Shani',
-        amount: '50000',
-        created_at: '2023-05-26 15:28:56',
-    }
-    ,
-
-    {
-        username: 'Zeeshan',
-        to_account_name: 'Hunny',
-        from_account_name: 'Shani',
-        amount: '250000',
-        created_at: '2023-05-26 15:28:56',
-    },
-
-    {
-      username: 'Zeeshan',
-      to_account_name: 'Hunny',
-      from_account_name: 'Shani',
-      amount: '350000',
-      created_at: '2023-05-26 15:28:56',
-    },
-
-    {
-        username: 'Zeeshan',
-        to_account_name: 'Hunny',
-        from_account_name: 'Shani',
-        amount: '10000',
-        created_at: '2023-05-26 15:28:56',
-    },
-    {
-        username: 'Saad',
-        to_account_name: 'Hunny',
-        from_account_name: 'Lashari',
-        amount: '20000',
-        created_at: '2023-05-26 15:28:56',
-    },
-
-    {
-        username: 'Yasir',
-        to_account_name: 'usama',
-        from_account_name: 'Shani',
-        amount: '150000',
-        created_at: '2023-05-26 15:28:56',
-    },
-
-    {
-        username: 'Zeeshan',
-        to_account_name: 'Hunny',
-        from_account_name: 'Shani',
-        amount: '10000',
-        created_at: '2023-05-26 15:28:56',
-    },
-    {
-        username: 'Saad',
-        to_account_name: 'Hunny',
-        from_account_name: 'Lashari',
-        amount: '20000',
-        created_at: '2023-05-26 15:28:56',
-    },
-
-    {
-        username: 'Yasir',
-        to_account_name: 'usama',
-        from_account_name: 'Shani',
-        amount: '150000',
-        created_at: '2023-05-26 15:28:56',
-    }
-];
+// ...existing imports...
 
 function Transaction() {
-    const chartRef = useRef(null); // Use a ref to store the chart instance
+    const [transaction, setTransaction] = useState([]);
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const id = queryParams.get('id');
 
     useEffect(() => {
-        // Prepare chart data
-        const labels = transaction.map((item) => item.username);
-        const amounts = transaction.map((item) => parseInt(item.amount));
-
-        // Create and update the chart
-        const ctx = chartRef.current.getContext('2d');
-
-        if (chartRef.current.chart) {
-            chartRef.current.chart.destroy(); // Destroy the previous chart instance
-        }
-
-        chartRef.current.chart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels,
-                datasets: [
-                    {
-                        label: 'Amount',
-                        data: amounts,
-                        backgroundColor: 'blueviolet',
-                    },
-                ],
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            stepSize: 50000,
-                        },
-                    },
-                },
-            },
-        });
+        getTransaction();
     }, []);
+
+    const getTransaction = async () => {
+        try {
+            const res = await axios({
+                url: `${App_host}/transaction/GetTransaction/${id}`,
+                method: 'get',
+                data: {},
+                headers: {
+                    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImlhdCI6MTY4NTAxOTMxOX0._hk0XM_tqmi3Mu1wKyyeHwEKJaSMz69RaMdEnvqg9Ww',
+                },
+            });
+            setTransaction(res.data.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+    const labels = transaction.map((data) => data.created_at)
+    const amountData = transaction.map((data) => data.amount);
+    const data = {
+        labels: labels,
+        datasets: [
+            {
+                label: 'Amount',
+                data: amountData,
+                backgroundColor: ['rgba(75,192,192,0.2)', 'rgba(54, 162, 235, 0.2)'],
+                borderColor: ['rgba(75,192,192,1)', 'rgba(54, 162, 235, 1)'],
+                borderWidth: 1,
+            },
+        ],
+
+    }
+    const options = {
+        scales: {
+            y: {
+                beginAtZero: true,
+            },
+        },
+    };
 
     return (
         <div className="home">
             <Navbar />
             <div className="divmain">
-
                 <div className="main_user">
-                    <div className="chart-container" style={{background:'antiquewhite'}}>
-                        <canvas ref={chartRef} id="transactionChart" width="400" height="200"></canvas>
+                    <div>
+                        <h2>Transaction Chart</h2>
+                        <Bar data={data} options={options} />
                     </div>
                     <h1 className="headuser">
                         Transaction <span style={{ color: 'blueviolet' }}>(Zeeshan) </span>
@@ -165,7 +87,7 @@ function Transaction() {
                         </thead>
                         <tbody>
                             {transaction.map((item) => (
-                                <tr key={item.username}>
+                                <tr key={item.id}>
                                     <td>{item.username}</td>
                                     <td>{item.to_account_name}</td>
                                     <td>{item.from_account_name}</td>
@@ -177,8 +99,6 @@ function Transaction() {
                     </table>
                 </div>
             </div>
-
-
         </div>
     );
 }
